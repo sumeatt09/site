@@ -1,0 +1,50 @@
+@use "./mixins";
+
+article.content {
+	& > p:first-of-type:first-child,
+	& > .toc + p:first-of-type {
+		grid-column: popout;
+		font-size: 1.25em;
+	}
+
+	:is(h1, h2, h3, h4, h5, h6) {
+		--size-site-icon: 1ch;
+		a .icon {
+			display: none;
+			visibility: hidden;
+			vertical-align: text-top;
+			margin-inline-start: 0.25ch;
+		}
+
+		&:focus,
+		&:hover {
+			a .icon {
+				display: inline-block;
+				visibility: visible;
+			}
+		}
+	}
+
+	& > .highlight {
+		@include mixins.popout(var(--radius-site-base), var(--radius-site-small));
+		outline-offset: -0.25em;
+
+		@include mixins.window-normal {
+			outline-offset: 0;
+		}
+	}
+
+	& > .figure {
+		@include mixins.popout(var(--radius-site-small));
+	}
+
+	.footnotes {
+		font-size: 0.85em;
+		margin-block-start: var(--gap-site-medium);
+		border-block-start: 1px dashed var(--border-site-body);
+
+		#footnote-label {
+			padding-block-start: var(--gap-site-medium);
+		}
+	}
+}

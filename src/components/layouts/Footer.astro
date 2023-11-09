@@ -1,0 +1,55 @@
+---
+import Sprites from "~components/Sprites.astro";
+import Icon from "~components/Icon.astro";
+import siteInfo from "~website";
+
+const authorInfo = siteInfo.author;
+const authorNetworks = authorInfo.networks;
+const siteAuthor = authorInfo.name;
+const siteIssueUrl = siteInfo.issueBase;
+---
+
+<footer class="footer">
+	<div class="footer-quote">
+		<Icon name="green-energy" class="footer-quote-decoration"/>
+		<random-quote></random-quote>
+		<noscript>
+			<p class="tagline">You can stop scrolling now. Take a break, sit back, and give yourself a moment.</p><p><cite>&mdash; Author of this site</cite></p>
+		</noscript>
+	</div>
+	<div class="footer-sections">
+		<div>
+			<strong>Say hi!</strong> Interested in software, ancient civilization, spirituality, archaeology? We gotta chat. Reach out on
+			<a href={authorNetworks.github.link} aria-label={authorNetworks.github.platform} rel="noopener noreferrer">{authorNetworks.github.platform}</a>, or 
+			<a href={authorNetworks.instagram.link} aria-label={authorNetworks.instagram.platform} rel="noopener noreferrer">{authorNetworks.instagram.platform}</a>.
+		</div>
+		<div class="footer-copyright">
+			<div>&copy; 2023, {siteAuthor}</div>
+			<div class="footer-links">
+				<a href="/privacy/">Privacy</a>
+				<a href={siteIssueUrl} rel="nofollow noopener noreferrer">Report an issue</a>
+				<a href="/sitemap-index.xml">Sitemap</a>
+			</div>
+		</div>
+	</div>
+</footer>
+<Sprites/>
+
+<script>
+	export class RandomQuote extends HTMLElement {
+		static tagName = "random-quote";
+	
+		static #messages = [
+			`<p class="stress tagline">Drop the idea of becoming someone, because you are already a masterpiece. You cannot be improved. You have only to come to it, to know it, to realize it.</p><p><cite>&mdash; Osho</cite></p>`,
+			`<p class="stress tagline"><del>Forget safety</del> <ins>Live where you fear to live</ins> Destroy your reputation. Be notorious.</p><p><cite>&mdash; Rumi</cite></p>`,
+			`<p class="stress tagline">Respond intelligently even to unintelligent treatment.</p><p><cite>&mdash; Lao Tzu</cite></p>`,
+			`<p class="stress tagline">Listen to the secret sound, the real sound, which is inside you. The one no one talks of speaks the secret sound to himself, and he is the one who has made it all.</p><p><cite>&mdash; Kabir</cite></p>`,
+		];
+	
+		connectedCallback() {
+			this.innerHTML = RandomQuote.#messages[Math.floor(Math.random() * RandomQuote.#messages.length)];
+		}
+	}
+
+	customElements.define(RandomQuote.tagName, RandomQuote);
+</script>

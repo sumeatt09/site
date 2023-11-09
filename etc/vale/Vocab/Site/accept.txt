@@ -1,0 +1,10 @@
+artifactory
+changeset
+chatbot(s)
+[Cc]odeblock|[Cc]odeblocks
+[Mm]onorepo
+[Pp]ostgres
+priviledges
+[Rr]ebase|[Rr]ebasing
+[Tt]estcontainers
+[Uu]secase|[Uu]secases

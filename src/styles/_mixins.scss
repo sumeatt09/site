@@ -1,0 +1,30 @@
+@mixin icon($data-uri) {
+	content: "";
+	mask-image: url($data-uri);
+	mask-repeat: no-repeat;
+	mask-position: top center;
+	mask-size: contain;
+	background-color: currentColor;
+}
+
+@mixin window-small {
+	@media screen and (width < 48rem) {
+		@content;
+	}
+}
+
+@mixin window-normal {
+	@media screen and (width >= 48rem) {
+		@content;
+	}
+}
+
+@mixin popout($radius-normal, $radius-small: 0) {
+	grid-column: full;
+	border-radius: #{$radius-small};
+
+	@include window-normal {
+		grid-column: popout;
+		border-radius: #{$radius-normal};
+	}
+}
